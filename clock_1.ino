@@ -56,11 +56,7 @@ void countDown() {
 
   switchVal = digitalRead(switchPin);
   if (switchVal == HIGH) {
-    showNumber(0);
-    delay(500);
-    clearAll();
-    showNumber(0);
-    delay(10000);
+    flashNumber(0);
   }
   
 }
@@ -91,11 +87,8 @@ void clearAll() {
 void generateRandom() {
   clearAll();
   int randomNumber;
-  int randomPattern;
-  
-  randomPattern = random(1,3);
-  
-  for(int x=1; x<= randomPatten; x++) {
+   
+  for(int x=1; x<= random(1,3); x++) {
      randomNumber = random(2,8);
      digitalWrite(randomNumber, HIGH);
   }
@@ -104,6 +97,18 @@ void generateRandom() {
   delay(1000);
 }
 
+void flashNumber(int number) {
+  int threshold = 1000000;
+  for(x=100;x<threshold; x = x*1.5) { 
+    clearAll();
+    showNumber(number);
+    Serial.println(x);
+    delay(x);
+  }  
+  clearAll();
+  showNumber(number);
+  delay(threshold);
+}
 //  switch (number)
 //  {
 //    case 1: segments = b | c; break;
