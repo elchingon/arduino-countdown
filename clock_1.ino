@@ -1,3 +1,4 @@
+// These pin numbers are relative to the digital pin outputs- change as needed on arduino
 int segmentA = 7;
 int segmentB = 8;
 int segmentC = 2;
@@ -25,12 +26,12 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   switchVal = digitalRead(switchPin);
-//  Serial.println(switchVal);
-//  if (switchVal == LOW) {
-//    generateRandom();
-//  } else {
+  Serial.println(switchVal);
+  if (switchVal == LOW) {
+     generateRandom();
+  } else {
     countDown();
-//  }
+  }
 //  digitalWrite(segmentA,HIGH); 
 //  digitalWrite(segmentB,HIGH); 
 //  digitalWrite(segmentC,HIGH); 
@@ -50,16 +51,17 @@ void countDown() {
     clearAll();
     showNumber(x);
     Serial.println(x);
-    delay(1000);
+    delay(2000);
   }
 
-//  switchVal = digitalRead(switchPin);
-//  if (switchVal == HIGH) {
-//    showNumber(0);
-//    delay(1000);
-//    clearAll();
-//    delay(1000);
-//  }
+  switchVal = digitalRead(switchPin);
+  if (switchVal == HIGH) {
+    showNumber(0);
+    delay(500);
+    clearAll();
+    showNumber(0);
+    delay(10000);
+  }
   
 }
 
@@ -89,8 +91,15 @@ void clearAll() {
 void generateRandom() {
   clearAll();
   int randomNumber;
-  randomNumber = random(0,9);
-  showNumber(randomNumber);
+  int randomPattern;
+  
+  randomPattern = random(1,3);
+  
+  for(int x=1; x<= randomPatten; x++) {
+     randomNumber = random(2,8);
+     digitalWrite(randomNumber, HIGH);
+  }
+  
 //  Serial.println(randomNumber);
   delay(1000);
 }
